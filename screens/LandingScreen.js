@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { Container, Text, Content } from 'native-base';
 
 class LandingScreen extends Component {
 	render() {
 		return (
-			<View>
-				<Text>This is the landing Screen </Text>
-			</View>
+			<Container style={styles.container}>
+				<Text>EMMUNIZE</Text>
+			</Container>
 		);
 	}
 }
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		backgroundColor: '#fff',
+		alignItems: 'center',
+		justifyContent: 'center'
+	}
+});
 
 export default LandingScreen;
