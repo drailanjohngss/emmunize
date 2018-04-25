@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import {
 	Container,
 	Text,
@@ -15,25 +16,41 @@ class LandingScreen extends Component {
 		return (
 			<Container style={styles.container}>
 				<Container>
-					<Text style={styles.textStyle}>EMMUNIZE</Text>
+					<Text style={styles.textStyle}>E-MMUNIZE APP</Text>
 				</Container>
 				<Container style={styles.container}>
 					<Card style={{ width: '100%' }}>
 						<CardItem>
-							<Text> Username: </Text>
-							<Input placeholder="input username" />
+							<Text> Email: </Text>
+							<Input placeholder="juandelacruz@gmail.com" />
 						</CardItem>
 						<CardItem>
 							<Text> Password: </Text>
 							<Input placeholder="********" />
 						</CardItem>
 						<CardItem>
-							<Button block full primary style={{ width: '100%' }}>
+							<Button
+								block
+								full
+								primary
+								style={{ width: '100%' }}
+								onPress={() => {
+									Actions.home();
+								}}
+							>
 								<Text>Sign In </Text>{' '}
 							</Button>
 						</CardItem>
 						<CardItem>
-							<Button transparent block full primary style={{ width: '100%' }}>
+							<Button
+								transparent
+								full
+								primary
+								style={{ width: '100%' }}
+								onPress={() => {
+									Actions.register();
+								}}
+							>
 								<Text>Register </Text>{' '}
 							</Button>
 						</CardItem>
@@ -51,7 +68,7 @@ const styles = StyleSheet.create({
 		width: '100%'
 	},
 	textStyle: {
-		fontSize: 50,
+		fontSize: 40,
 		paddingTop: 30
 	}
 });
