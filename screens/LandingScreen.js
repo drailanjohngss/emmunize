@@ -38,7 +38,7 @@ class LandingScreen extends Component {
 									Actions.home();
 								}}
 							>
-								<Text>Sign In </Text>{' '}
+								<Text>Sign In </Text>
 							</Button>
 						</CardItem>
 						<CardItem>
@@ -51,7 +51,7 @@ class LandingScreen extends Component {
 									Actions.register();
 								}}
 							>
-								<Text>Register </Text>{' '}
+								<Text>Register </Text>
 							</Button>
 						</CardItem>
 					</Card>

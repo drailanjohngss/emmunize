@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import {
 	Container,
@@ -36,7 +36,15 @@ class HomeScreen extends Component {
 				</Row>
 				<Row>
 					<Col style={styles.colStyle}>
-						<MaterialCommunityIcons size={80} name="calendar-clock" />
+						<TouchableOpacity
+							transparent
+							style={{}}
+							onPress={() => {
+								Actions.vaccination();
+							}}
+						>
+							<MaterialCommunityIcons size={80} name="calendar-clock" />
+						</TouchableOpacity>
 						<Text>Vaccination Schedule</Text>
 					</Col>
 					<Col style={styles.colStyle}>
@@ -46,11 +54,25 @@ class HomeScreen extends Component {
 				</Row>
 				<Row>
 					<Col style={styles.colStyle}>
-						<Entypo size={80} name="help-with-circle" />
+						<TouchableOpacity
+							transparent
+							onPress={() => {
+								Actions.about();
+							}}
+						>
+							<Entypo size={80} name="help-with-circle" />
+						</TouchableOpacity>
 						<Text>Help</Text>
 					</Col>
 					<Col style={styles.colStyle}>
-						<FontAwesome size={80} name="user-md" />
+						<TouchableOpacity
+							transparent
+							onPress={() => {
+								Actions.healthcareprovider();
+							}}
+						>
+							<FontAwesome size={80} name="user-md" />
+						</TouchableOpacity>
 						<Text>Healthcare Provider</Text>
 					</Col>
 				</Row>
