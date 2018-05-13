@@ -4,7 +4,7 @@ import Router from './Router';
 import Expo from 'expo';
 import { StatusBar } from 'react-native';
 import Config from './Config/firebase.js';
-import * as Firebase from 'firebase';
+import * as firebase from 'firebase';
 import '@firebase/firestore';
 
 import store from './store';
@@ -21,6 +21,9 @@ export default class App extends React.Component {
 			Ionicons: require('@expo/vector-icons/fonts/Ionicons.ttf')
 		});
 		this.setState({ loading: false });
+	}
+
+	componentDidMount() {
 		const firebase = require('firebase');
 		firebase.initializeApp(Config.Firebase);
 	}
