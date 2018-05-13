@@ -26,19 +26,29 @@ class HomeScreen extends Component {
 				<Text style={styles.title}>E-mmunize App</Text>
 				<Row>
 					<Col style={styles.colStyle}>
-						<Entypo size={80} name="v-card" />
+						<TouchableOpacity
+							onPress={() => {
+								Actions.profile();
+							}}
+						>
+							<Entypo size={80} name="v-card" />
+						</TouchableOpacity>
 						<Text>Profile</Text>
 					</Col>
 					<Col style={styles.colStyle}>
-						<Icon style={{ fontSize: 80 }} name="ios-medkit" />
+						<TouchableOpacity
+							onPress={() => {
+								Actions.immunization();
+							}}
+						>
+							<Icon style={{ fontSize: 80 }} name="ios-medkit" />
+						</TouchableOpacity>
 						<Text>Immunization</Text>
 					</Col>
 				</Row>
 				<Row>
 					<Col style={styles.colStyle}>
 						<TouchableOpacity
-							transparent
-							style={{}}
 							onPress={() => {
 								Actions.vaccination();
 							}}
@@ -48,7 +58,13 @@ class HomeScreen extends Component {
 						<Text>Vaccination Schedule</Text>
 					</Col>
 					<Col style={styles.colStyle}>
-						<Octicons size={80} name="megaphone" />
+						<TouchableOpacity
+							onPress={() => {
+								Actions.notificationalert();
+							}}
+						>
+							<Octicons size={80} name="megaphone" />
+						</TouchableOpacity>
 						<Text>Notification Alert</Text>
 					</Col>
 				</Row>
