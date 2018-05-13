@@ -6,6 +6,9 @@ import HomeScreen from './screens/HomeScreen';
 import AboutScreen from './screens/AboutScreen';
 import HealthCareProviderScreen from './screens/HealthCareProviderScreen';
 import VaccinationScheduleScreen from './screens/VaccinationScheduleScreen';
+import NotificationAlertScreen from './screens/NotificationAlertScreen';
+import ProfileScreen from './screens/ProfileScreen';
+import ImmunizationScreen from './screens/ImmunizationScreen';
 
 const RouterComponent = () => {
 	//check react-native-router-flux documentations
@@ -26,6 +29,17 @@ const RouterComponent = () => {
 					key="healthcareprovider"
 					component={HealthCareProviderScreen}
 					title="Health Care Provider"
+				/>
+				<Scene
+					key="notificationalert"
+					component={NotificationAlertScreen}
+					title="Notifications"
+				/>
+				<Scene key="profile" component={ProfileScreen} title="Profile" />
+				<Scene
+					key="immunization"
+					component={ImmunizationScreen}
+					title="Immunization"
 				/>
 			</Scene>
 		</Router>
