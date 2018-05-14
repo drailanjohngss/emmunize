@@ -10,8 +10,21 @@ import {
 	Input,
 	Button
 } from 'native-base';
+import * as firebase from 'firebase';
+import '@firebase/firestore';
 
 class LandingScreen extends Component {
+	componentDidMount() {
+		firebase.auth().onAuthStateChanged(user => {
+			if (user != null) {
+				console.log('We are authenticated now!');
+			} else {
+				console.log('Error');
+			}
+
+			// Do other things
+		});
+	}
 	render() {
 		return (
 			<Container style={styles.container}>
