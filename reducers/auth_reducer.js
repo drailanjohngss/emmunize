@@ -1,12 +1,13 @@
-import { FACEBOOK_LOGIN_SUCCESS, FACEBOOK_LOGIN_FAIL } from '../actions/types';
+import { NAME_CHANGE } from '../actions/types';
 
-export default function(state = {}, action) {
+const INITIAL_STATE = {
+	name: ''
+};
+
+export default function(state = INITIAL_STATE, action) {
 	switch (action.type) {
-		case FACEBOOK_LOGIN_SUCCESS:
-			return { token: action.payload };
-
-		case FACEBOOK_LOGIN_FAIL:
-			return { token: null };
+		case NAME_CHANGE:
+			return { ...state, name: action.payload };
 
 		default:
 			return state;

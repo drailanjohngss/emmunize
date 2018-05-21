@@ -17,7 +17,7 @@ const RouterComponent = () => {
 		<Router>
 			<Scene key="root">
 				<Scene key="landing" initial component={LandingScreen} />
-				<Scene key="register" component={RegisterScreen} />
+				<Scene key="register" component={RegisterScreen} title="Register" />
 				<Scene key="home" hideNavBar={true} component={HomeScreen} />
 				<Scene key="about" component={AboutScreen} title="About" />
 				<Scene

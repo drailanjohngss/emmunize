@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
+import * as firebase from 'firebase';
+import '@firebase/firestore';
 import { StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import DatePicker from 'react-native-datepicker';
@@ -21,6 +25,10 @@ class RegisterScreen extends Component {
 		this.state = { date: '' };
 	}
 
+	onNameChange(text) {
+		this.props.nameChanged(text);
+	}
+
 	render() {
 		return (
 			<Container style={styles.container}>
@@ -28,7 +36,7 @@ class RegisterScreen extends Component {
 					<Form style={{}}>
 						<Item stackedLabel>
 							<Label>Name</Label>
-							<Input />
+							<Input onChangeText={this.onNameChange.bind(this)} />
 						</Item>
 						<Item stackedLabel>
 							<Label>Age</Label>
@@ -101,4 +109,11 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default RegisterScreen;
+const mapStateToProps = state => {
+	console.log(state);
+	return {
+		name: state.auth.name
+	};
+};
+
+export default connect(mapStateToProps, actions)(RegisterScreen);
