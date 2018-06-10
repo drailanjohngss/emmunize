@@ -24,9 +24,40 @@ class RegisterScreen extends Component {
 		super(props);
 		this.state = { date: '' };
 	}
-
+	/**
+	 * redux name input handler
+	 * check auth_actions.js
+	 */
 	onNameChange(text) {
 		this.props.nameChanged(text);
+	}
+
+	/**
+	 * redux age input handler
+	 * check auth_actions.js
+	 */
+	onAgeChange(text) {
+		this.props.ageChanged(text);
+	}
+
+	/**
+	 * redux address input handler
+	 * check auth_actions.js
+	 */
+	onAddressChange(text) {
+		this.props.addressChange(text);
+	}
+
+	/**
+	 * redux save registration details
+	 * check auth_actions.js
+	 */
+	onRegisterPress() {
+		const { name, age, address, birthday } = this.props;
+		console.log(`name ${name}`);
+		console.log(`age ${age}`);
+		console.log(`address ${address}`);
+		console.log(`birthday ${birthday}`);
 	}
 
 	render() {
@@ -40,11 +71,11 @@ class RegisterScreen extends Component {
 						</Item>
 						<Item stackedLabel>
 							<Label>Age</Label>
-							<Input />
+							<Input onChangeText={this.onAgeChange.bind(this)} />
 						</Item>
 						<Item stackedLabel>
 							<Label>Address</Label>
-							<Input />
+							<Input onChangeText={this.onAddressChange.bind(this)} />
 						</Item>
 						<Item stackedLabel style={{ height: 90 }}>
 							<Label>Birthday</Label>
@@ -69,7 +100,8 @@ class RegisterScreen extends Component {
 									// ... You can check the source to find the other keys.
 								}}
 								onDateChange={date => {
-									this.setState({ date: date });
+									this.setState({ date });
+									this.props.birthdayChange(date);
 								}}
 							/>
 						</Item>
@@ -86,7 +118,14 @@ class RegisterScreen extends Component {
 							<Input />
 						</Item>
 
-						<Button block full style={{ width: '100%' }}>
+						<Button
+							block
+							full
+							style={{ width: '100%' }}
+							onPress={() => {
+								this.onRegisterPress();
+							}}
+						>
 							<Text>Register</Text>
 						</Button>
 						<Input />
@@ -110,9 +149,11 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
-	console.log(state);
 	return {
-		name: state.auth.name
+		name: state.auth.name,
+		age: state.auth.age,
+		address: state.auth.address,
+		birthday: state.auth.birthday
 	};
 };
 
