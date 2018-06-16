@@ -49,15 +49,50 @@ class RegisterScreen extends Component {
 	}
 
 	/**
-	 * redux save registration details
+	 * redux mothersName input handler
 	 * check auth_actions.js
 	 */
+	onMothersNameChange(text) {
+		this.props.mothersNameChange(text);
+	}
+
+	/**
+	 * redux fathers Name input handler
+	 * check auth_actions.js
+	 */
+	onFathersNameChange(text) {
+		this.props.fathersNameChange(text);
+	}
+
+	/**
+	 * redux GuardiansName input handler
+	 * check auth_actions.js
+	 */
+	onGuardiansNameChange(text) {
+		this.props.guardiansNameChange(text);
+	}
+
+	/**
+	 * redux save registration details
+	 * Function to give the input values to redux
+	 */
 	onRegisterPress() {
-		const { name, age, address, birthday } = this.props;
+		const {
+			name,
+			age,
+			address,
+			birthday,
+			mothersName,
+			fathersName,
+			guardiansName
+		} = this.props;
 		console.log(`name ${name}`);
 		console.log(`age ${age}`);
 		console.log(`address ${address}`);
 		console.log(`birthday ${birthday}`);
+		console.log(`MothersName ${mothersName}`);
+		console.log(`FathersName ${fathersName}`);
+		console.log(`Guardians Name ${guardiansName}`);
 	}
 
 	render() {
@@ -107,15 +142,15 @@ class RegisterScreen extends Component {
 						</Item>
 						<Item stackedLabel>
 							<Label>Mothers Name</Label>
-							<Input />
+							<Input onChangeText={this.onMothersNameChange.bind(this)} />
 						</Item>
 						<Item stackedLabel>
 							<Label>Fathers Name</Label>
-							<Input />
+							<Input onChangeText={this.onFathersNameChange.bind(this)} />
 						</Item>
 						<Item stackedLabel last>
 							<Label>Guardians Name</Label>
-							<Input />
+							<Input onChangeText={this.onGuardiansNameChange.bind(this)} />
 						</Item>
 
 						<Button
@@ -153,7 +188,10 @@ const mapStateToProps = state => {
 		name: state.auth.name,
 		age: state.auth.age,
 		address: state.auth.address,
-		birthday: state.auth.birthday
+		birthday: state.auth.birthday,
+		mothersName: state.auth.mothersName,
+		fathersName: state.auth.fathersName,
+		guardiansName: state.auth.guardiansName
 	};
 };
 

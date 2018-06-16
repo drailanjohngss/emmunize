@@ -2,7 +2,10 @@ import {
 	NAME_CHANGE,
 	AGE_CHANGE,
 	ADDRESS_CHANGE,
-	BIRTHDAY_CHANGE
+	BIRTHDAY_CHANGE,
+	MOTHERS_NAME_CHANGE,
+	FATHERS_NAME_CHANGE,
+	GUARDIANS_NAME_CHANGE
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -19,6 +22,12 @@ export default function(state = INITIAL_STATE, action) {
 			return { ...state, address: action.payload };
 		case BIRTHDAY_CHANGE:
 			return { ...state, birthday: action.payload };
+		case MOTHERS_NAME_CHANGE:
+			return { ...state, mothersName: action.payload };
+		case FATHERS_NAME_CHANGE:
+			return { ...state, fathersName: action.payload };
+		case GUARDIANS_NAME_CHANGE:
+			return { ...state, guardiansName: action.payload };
 		default:
 			return state;
 	}
