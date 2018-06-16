@@ -5,7 +5,9 @@ import {
 	BIRTHDAY_CHANGE,
 	MOTHERS_NAME_CHANGE,
 	FATHERS_NAME_CHANGE,
-	GUARDIANS_NAME_CHANGE
+	GUARDIANS_NAME_CHANGE,
+	EMAIL_CHANGE,
+	PASSWORD_CHANGE
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -14,6 +16,10 @@ const INITIAL_STATE = {
 
 export default function(state = INITIAL_STATE, action) {
 	switch (action.type) {
+		case EMAIL_CHANGE:
+			return { ...state, email: action.payload };
+		case PASSWORD_CHANGE:
+			return { ...state, password: action.payload };
 		case NAME_CHANGE:
 			return { ...state, name: action.payload };
 		case AGE_CHANGE:

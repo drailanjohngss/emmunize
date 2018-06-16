@@ -1,3 +1,7 @@
+import * as firebase from 'firebase';
+import '@firebase/firestore';
+import Moment from 'moment';
+
 import {
 	NAME_CHANGE,
 	AGE_CHANGE,
@@ -5,7 +9,9 @@ import {
 	BIRTHDAY_CHANGE,
 	MOTHERS_NAME_CHANGE,
 	FATHERS_NAME_CHANGE,
-	GUARDIANS_NAME_CHANGE
+	GUARDIANS_NAME_CHANGE,
+	EMAIL_CHANGE,
+	PASSWORD_CHANGE
 } from './types';
 
 export const nameChanged = text => {
@@ -54,5 +60,49 @@ export const guardiansNameChange = text => {
 	return {
 		type: GUARDIANS_NAME_CHANGE,
 		payload: text
+	};
+};
+
+export const emailChange = text => {
+	return {
+		type: EMAIL_CHANGE,
+		payload: text
+	};
+};
+export const passwordChange = text => {
+	return {
+		type: PASSWORD_CHANGE,
+		payload: text
+	};
+};
+
+export const saveUserDetails = ({
+	name,
+	age,
+	address,
+	birthday,
+	mothersName,
+	fathersName,
+	guardiansName,
+	email,
+	password
+}) => {
+	return dispatch => {
+		const dateCreated = Moment()
+			.format('YYYY-MM-DD hh:mm:ss')
+			.toString();
+		firebase
+			.auth()
+			.createUserWithEmailAndPassword(email, password)
+			.then(user => {
+				console.log(user);
+			})
+			.catch(function(error) {
+				// Handle Errors here.
+				const errorCode = error.code;
+				const errorMessage = error.message;
+				console.log(error);
+				// ...
+			});
 	};
 };

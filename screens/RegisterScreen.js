@@ -73,6 +73,21 @@ class RegisterScreen extends Component {
 	}
 
 	/**
+	 * redux GuardiansName input handler
+	 * check auth_actions.js
+	 */
+	onEmailChange(text) {
+		this.props.emailChange(text);
+	}
+	/**
+	 * redux GuardiansName input handler
+	 * check auth_actions.js
+	 */
+	onPasswordChange(text) {
+		this.props.passwordChange(text);
+	}
+
+	/**
 	 * redux save registration details
 	 * Function to give the input values to redux
 	 */
@@ -84,15 +99,21 @@ class RegisterScreen extends Component {
 			birthday,
 			mothersName,
 			fathersName,
-			guardiansName
+			guardiansName,
+			email,
+			password
 		} = this.props;
-		console.log(`name ${name}`);
-		console.log(`age ${age}`);
-		console.log(`address ${address}`);
-		console.log(`birthday ${birthday}`);
-		console.log(`MothersName ${mothersName}`);
-		console.log(`FathersName ${fathersName}`);
-		console.log(`Guardians Name ${guardiansName}`);
+		this.props.saveUserDetails({
+			name,
+			age,
+			address,
+			birthday,
+			mothersName,
+			fathersName,
+			guardiansName,
+			email,
+			password
+		});
 	}
 
 	render() {
@@ -100,6 +121,14 @@ class RegisterScreen extends Component {
 			<Container style={styles.container}>
 				<Content>
 					<Form style={{}}>
+						<Item stackedLabel>
+							<Label>Email</Label>
+							<Input onChangeText={this.onEmailChange.bind(this)} />
+						</Item>
+						<Item stackedLabel>
+							<Label>Password</Label>
+							<Input onChangeText={this.onPasswordChange.bind(this)} />
+						</Item>
 						<Item stackedLabel>
 							<Label>Name</Label>
 							<Input onChangeText={this.onNameChange.bind(this)} />
@@ -185,6 +214,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
 	return {
+		email: state.auth.email,
+		password: state.auth.password,
 		name: state.auth.name,
 		age: state.auth.age,
 		address: state.auth.address,
