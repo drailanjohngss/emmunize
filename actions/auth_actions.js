@@ -88,14 +88,27 @@ export const saveUserDetails = ({
 	password
 }) => {
 	return dispatch => {
-		const dateCreated = Moment()
-			.format('YYYY-MM-DD hh:mm:ss')
-			.toString();
+		const firestore = firebase.firestore();
+		const settings = { timestampsInSnapshots: true };
+		firestore.settings(settings);
+		const created_at = firebase.firestore.FieldValue.serverTimestamp();
 		firebase
 			.auth()
 			.createUserWithEmailAndPassword(email, password)
-			.then(user => {
-				console.log(user);
+			.then(data => {
+				const uid = data.user.uid;
+				const db = firebase.firestore();
+				const docRef = db.collection('users').doc(uid);
+				const userDetails = docRef.set({
+					name,
+					age,
+					address,
+					birthday,
+					mothersName,
+					fathersName,
+					guardiansName,
+					created_at
+				});
 			})
 			.catch(function(error) {
 				// Handle Errors here.
