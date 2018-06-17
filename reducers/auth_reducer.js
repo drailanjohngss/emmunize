@@ -7,7 +7,9 @@ import {
 	FATHERS_NAME_CHANGE,
 	GUARDIANS_NAME_CHANGE,
 	EMAIL_CHANGE,
-	PASSWORD_CHANGE
+	PASSWORD_CHANGE,
+	LOADING_TRUE,
+	LOADING_STOP
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -34,6 +36,10 @@ export default function(state = INITIAL_STATE, action) {
 			return { ...state, fathersName: action.payload };
 		case GUARDIANS_NAME_CHANGE:
 			return { ...state, guardiansName: action.payload };
+		case LOADING_TRUE:
+			return { ...state, loading: true };
+		case LOADING_STOP:
+			return { ...state, loading: false };
 		default:
 			return state;
 	}

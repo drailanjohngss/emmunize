@@ -1,6 +1,7 @@
 import * as firebase from 'firebase';
 import '@firebase/firestore';
 import Moment from 'moment';
+import { Alert } from 'react-native';
 
 import {
 	NAME_CHANGE,
@@ -11,7 +12,9 @@ import {
 	FATHERS_NAME_CHANGE,
 	GUARDIANS_NAME_CHANGE,
 	EMAIL_CHANGE,
-	PASSWORD_CHANGE
+	PASSWORD_CHANGE,
+	LOADING_STOP,
+	LOADING_TRUE
 } from './types';
 
 export const nameChanged = text => {
@@ -88,6 +91,7 @@ export const saveUserDetails = ({
 	password
 }) => {
 	return dispatch => {
+		dispatch({ type: LOADING_TRUE });
 		const firestore = firebase.firestore();
 		const settings = { timestampsInSnapshots: true };
 		firestore.settings(settings);
@@ -99,16 +103,32 @@ export const saveUserDetails = ({
 				const uid = data.user.uid;
 				const db = firebase.firestore();
 				const docRef = db.collection('users').doc(uid);
-				const userDetails = docRef.set({
-					name,
-					age,
-					address,
-					birthday,
-					mothersName,
-					fathersName,
-					guardiansName,
-					created_at
-				});
+				const userDetails = docRef
+					.set({
+						name,
+						age,
+						address,
+						birthday,
+						mothersName,
+						fathersName,
+						guardiansName,
+						created_at
+					})
+					.then(
+						Alert.alert(
+							'Success',
+							'Account Created Succesfully',
+							[
+								{
+									text: 'Continue',
+									onPress: () => {
+										dispatch({ type: LOADING_STOP });
+									}
+								}
+							],
+							{ cancelable: false }
+						)
+					);
 			})
 			.catch(function(error) {
 				// Handle Errors here.

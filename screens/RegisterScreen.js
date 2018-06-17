@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 import * as firebase from 'firebase';
 import '@firebase/firestore';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import DatePicker from 'react-native-datepicker';
 import {
@@ -16,7 +16,8 @@ import {
 	Button,
 	Form,
 	Item,
-	Label
+	Label,
+	Spinner
 } from 'native-base';
 
 class RegisterScreen extends Component {
@@ -116,6 +117,24 @@ class RegisterScreen extends Component {
 		});
 	}
 
+	renderButton() {
+		if (this.props.loading) {
+			return <Spinner />;
+		}
+		return (
+			<Button
+				block
+				full
+				style={{ width: '100%' }}
+				onPress={() => {
+					this.onRegisterPress();
+				}}
+			>
+				<Text>Register</Text>
+			</Button>
+		);
+	}
+
 	render() {
 		return (
 			<Container style={styles.container}>
@@ -127,7 +146,10 @@ class RegisterScreen extends Component {
 						</Item>
 						<Item stackedLabel>
 							<Label>Password</Label>
-							<Input onChangeText={this.onPasswordChange.bind(this)} />
+							<Input
+								secureTextEntry
+								onChangeText={this.onPasswordChange.bind(this)}
+							/>
 						</Item>
 						<Item stackedLabel>
 							<Label>Name</Label>
@@ -181,17 +203,8 @@ class RegisterScreen extends Component {
 							<Label>Guardians Name</Label>
 							<Input onChangeText={this.onGuardiansNameChange.bind(this)} />
 						</Item>
+						<View>{this.renderButton()}</View>
 
-						<Button
-							block
-							full
-							style={{ width: '100%' }}
-							onPress={() => {
-								this.onRegisterPress();
-							}}
-						>
-							<Text>Register</Text>
-						</Button>
 						<Input />
 					</Form>
 				</Content>
@@ -222,7 +235,8 @@ const mapStateToProps = state => {
 		birthday: state.auth.birthday,
 		mothersName: state.auth.mothersName,
 		fathersName: state.auth.fathersName,
-		guardiansName: state.auth.guardiansName
+		guardiansName: state.auth.guardiansName,
+		loading: state.auth.loading
 	};
 };
 
