@@ -19,7 +19,7 @@ class LandingScreen extends Component {
 			if (user != null) {
 				console.log('We are authenticated now!');
 			} else {
-				console.log('Error');
+				console.log('No logged in user');
 			}
 
 			// Do other things
