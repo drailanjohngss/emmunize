@@ -10,3 +10,5 @@ export const PASSWORD_CHANGE = 'password_change';
 
 export const LOADING_TRUE = 'loading_true';
 export const LOADING_STOP = 'loading_stop';
+
+export const GET_ABOUT = 'get_about';

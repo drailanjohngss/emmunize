@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
+import * as firebase from 'firebase';
+import '@firebase/firestore';
 import { StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import {
@@ -16,6 +20,7 @@ class AboutScreen extends Component {
 		return (
 			<Container style={styles.container}>
 				<Text>About Screen</Text>
+				<Text>{this.props.about.content}</Text>
 			</Container>
 		);
 	}
@@ -33,4 +38,10 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default AboutScreen;
+const mapStateToProps = state => {
+	return {
+		about: state.about.about
+	};
+};
+
+export default connect(mapStateToProps, actions)(AboutScreen);

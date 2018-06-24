@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 import {
 	Container,
 	Text,
@@ -20,6 +22,10 @@ import Octicons from 'react-native-vector-icons/Octicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 class HomeScreen extends Component {
+	componentDidMount() {
+		this.props.getAboutDetails();
+	}
+
 	render() {
 		return (
 			<Container style={styles.container}>
@@ -117,4 +123,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default HomeScreen;
+export default connect(null, actions)(HomeScreen);
