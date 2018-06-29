@@ -14,13 +14,16 @@ import {
 	Input,
 	Button
 } from 'native-base';
+import content from '../Config/content';
 
 class AboutScreen extends Component {
 	render() {
 		return (
 			<Container style={styles.container}>
-				<Text>About Screen</Text>
-				<Text>{this.props.about.content}</Text>
+				<Text style={styles.aboutText}>
+					{' '}
+					{content.static.aboutScreen}{' '}
+				</Text>
 			</Container>
 		);
 	}
@@ -35,13 +38,10 @@ const styles = StyleSheet.create({
 	textStyle: {
 		fontSize: 50,
 		paddingTop: 30
+	},
+	aboutText: {
+		margin: 50
 	}
 });
 
-const mapStateToProps = state => {
-	return {
-		about: state.about.about
-	};
-};
-
-export default connect(mapStateToProps, actions)(AboutScreen);
+export default AboutScreen;
