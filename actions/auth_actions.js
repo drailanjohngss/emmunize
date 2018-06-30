@@ -2,6 +2,7 @@ import * as firebase from 'firebase';
 import '@firebase/firestore';
 import Moment from 'moment';
 import { Alert } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 
 import {
 	NAME_CHANGE,
@@ -92,9 +93,6 @@ export const saveUserDetails = ({
 }) => {
 	return dispatch => {
 		dispatch({ type: LOADING_TRUE });
-		const firestore = firebase.firestore();
-		const settings = { timestampsInSnapshots: true };
-		firestore.settings(settings);
 		const created_at = firebase.firestore.FieldValue.serverTimestamp();
 		firebase
 			.auth()
@@ -122,20 +120,23 @@ export const saveUserDetails = ({
 								{
 									text: 'Continue',
 									onPress: () => {
+										Actions.home();
 										dispatch({ type: LOADING_STOP });
 									}
 								}
-							],
-							{ cancelable: false }
+							]
+							// { cancelable: false }
 						)
-					);
+					)
+					.catch(error => {
+						Alert.alert('Account Creation Failed', error);
+						dispatch({ type: LOADING_STOP });
+					});
 			})
-			.catch(function(error) {
+			.catch(error => {
 				// Handle Errors here.
-				const errorCode = error.code;
-				const errorMessage = error.message;
-				console.log(error);
 				// ...
+				dispatch({ type: LOADING_STOP });
 			});
 	};
 };

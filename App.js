@@ -26,6 +26,9 @@ export default class App extends React.Component {
 	componentDidMount() {
 		const firebase = require('firebase');
 		firebase.initializeApp(Config.Firebase);
+		const firestore = firebase.firestore();
+		const settings = { timestampsInSnapshots: true };
+		firestore.settings(settings);
 	}
 
 	render() {
