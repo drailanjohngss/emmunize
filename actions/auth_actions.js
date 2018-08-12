@@ -137,7 +137,7 @@ export const saveUserDetails = ({
                                 {
                                     text: 'Continue',
                                     onPress: () => {
-                                        // function for creating vaccination schedule
+                                        // fire creating vaccination schedule function
                                         Scheduling.createSchedule(birthday);
                                         Actions.home();
                                         dispatch({ type: LOADING_STOP });

@@ -12,3 +12,5 @@ export const LOADING_TRUE = 'loading_true';
 export const LOADING_STOP = 'loading_stop';
 
 export const GET_ABOUT = 'get_about';
+
+export const GET_SCHEDULE = 'get_schedule';

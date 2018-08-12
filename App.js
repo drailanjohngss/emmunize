@@ -1,4 +1,5 @@
 import React from 'react';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import Router from './Router';
 import Expo from 'expo';
@@ -6,8 +7,10 @@ import { StatusBar } from 'react-native';
 import Config from './Config/firebase.js';
 import * as firebase from 'firebase';
 import '@firebase/firestore';
-
+import logger from 'redux-logger';
+import ReduxThunk from 'redux-thunk';
 import store from './store';
+import reducers from './reducers';
 
 export default class App extends React.Component {
     constructor(props) {
@@ -35,6 +38,11 @@ export default class App extends React.Component {
         if (this.state.loading) {
             return <Expo.AppLoading />;
         }
+        const store = createStore(
+            reducers,
+            {},
+            applyMiddleware(ReduxThunk, logger)
+        );
         return (
             <Provider store={store}>
                 <Router />
