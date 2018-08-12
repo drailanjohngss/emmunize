@@ -3,6 +3,7 @@ import '@firebase/firestore';
 import Moment from 'moment';
 import { Alert } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import Scheduling from '../components/scheduling';
 
 import {
     NAME_CHANGE,
@@ -119,6 +120,7 @@ export const saveUserDetails = ({
                 const userDetails = docRef
                     .set({
                         name,
+                        email,
                         age,
                         address,
                         birthday,
@@ -135,6 +137,8 @@ export const saveUserDetails = ({
                                 {
                                     text: 'Continue',
                                     onPress: () => {
+                                        // function for creating vaccination schedule
+                                        Scheduling.createSchedule(birthday);
                                         Actions.home();
                                         dispatch({ type: LOADING_STOP });
                                     }
@@ -151,7 +155,25 @@ export const saveUserDetails = ({
             .catch(error => {
                 // Handle Errors here.
                 // ...
+                console.log(error);
                 dispatch({ type: LOADING_STOP });
             });
     };
+};
+
+function createSchedule(date) {
+    console.log(date);
+}
+
+export const onSignOut = () => async dispatch => {
+    firebase
+        .auth()
+        .signOut()
+        .then(() => {
+            console.log('You have log-out succesfully');
+            Actions.landing();
+        })
+        .catch(() => {
+            Actions.landing();
+        });
 };
