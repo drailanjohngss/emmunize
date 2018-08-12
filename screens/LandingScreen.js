@@ -23,10 +23,17 @@ class LandingScreen extends Component {
         };
     }
 
+    componentWillUnmount() {
+        if (this.unsubscriber) {
+            this.unsubscriber();
+        }
+    }
+
     componentDidMount() {
-        firebase.auth().onAuthStateChanged(user => {
+        this.unsubscriber = firebase.auth().onAuthStateChanged(user => {
             if (user != null) {
                 console.log('We are authenticated now!');
+                Actions.home();
             } else {
                 console.log('No logged in user');
             }
